@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Buscador en la misma página</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    #searchInput {
+      margin-bottom: 10px;
+      padding: 5px;
+      width: 300px;
+      font-size: 16px;
+    }
+    .highlight {
+      background-color: yellow;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>Buscador de Texto en la Misma Pantalla</h1>
+  <input type="text" id="searchInput" placeholder="Escribe para buscar..." />
+  <button onclick="buscarTexto()">Buscar</button>
+  <p id="content">
+    Este es un ejemplo de cómo buscar texto en la misma página HTML. Puedes ingresar una palabra o frase en el cuadro de búsqueda, y el texto coincidente será resaltado.
+  </p>
+
+  <script>
+    function buscarTexto() {
+      // Eliminar resaltados anteriores
+      const content = document.getElementById("content");
+      content.innerHTML = content.innerHTML.replace(/<span class="highlight">|<\/span>/g, "");
+
+      // Obtener el texto a buscar
+      const searchInput = document.getElementById("searchInput").value;
+      if (!searchInput.trim()) return; // No hacer nada si el input está vacío
+
+      // Crear una expresión regular para el texto ingresado
+      const regex = new RegExp(`(${searchInput})`, "gi");
+
+      // Reemplazar coincidencias con un span para resaltar
+      content.innerHTML = content.innerHTML.replace(regex, '<span class="highlight">$1</span>');
+    }
+  </script>
+</body>
+</html>
